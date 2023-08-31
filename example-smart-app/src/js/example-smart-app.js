@@ -49,6 +49,10 @@
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
 
+          if(typeof height[0] != 'undefined' && typeof height[0].valueQuantity.value != 'undefined' && typeof height[0].valueQuantity.unit != 'undefined') {
+            p.height = height[0].valueQuantity.value + ' ' + height[0].valueQuantity.unit;
+          }
+
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
@@ -57,8 +61,13 @@
             p.diastolicbp = diastolicbp;
           }
 
-          p.hdl = getQuantityValueAndUnit(hdl[0]);
-          p.ldl = getQuantityValueAndUnit(ldl[0]);
+          if(typeof hdl[0] != 'undefined' && typeof hdl[0].valueQuantity.value != 'undefined' && typeof hdl[0].valueQuantity.unit != 'undefined') {
+            p.hdl = hdl[0].valueQuantity.value + ' ' + hdl[0].valueQuantity.unit;
+          }
+    
+          if(typeof ldl[0] != 'undefined' && typeof ldl[0].valueQuantity.value != 'undefined' && typeof ldl[0].valueQuantity.unit != 'undefined') {
+            p.ldl = ldl[0].valueQuantity.value + ' ' + ldl[0].valueQuantity.unit;
+          }
 
           ret.resolve(p);
         });
