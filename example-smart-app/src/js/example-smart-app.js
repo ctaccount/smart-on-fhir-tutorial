@@ -22,13 +22,9 @@
                     }
                   });
 
-        var coverage = smart.patient.api.fetchAll({
-                    type: 'Coverage'
-                  });
-
         $.when(pt, obv).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv, coverage) {
+        $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
