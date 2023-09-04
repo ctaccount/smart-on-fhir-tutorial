@@ -22,7 +22,7 @@
                     }
                   });
 
-        var coveage = smart.patient.api.fetchAll({
+        var coverage = smart.patient.api.fetchAll({
                     type: 'Coverage',
                     query: {
                       code: {
@@ -33,10 +33,11 @@
                     }
                   });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, coverage).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, coverage).done(function(patient, obv, coverage) {
           var byCodes = smart.byCodes(obv, 'code');
+          var byCovCodes = smart.byCodes(coverage, 'code');
           var gender = patient.gender;
 
           var fname = '';
