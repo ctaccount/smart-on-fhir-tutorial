@@ -22,7 +22,11 @@
                     }
                   });
 
-        $.when(pt, obv).fail(onError);
+        var cov = smart.patient.api.fetchAll({
+                    type: 'Coverage'
+                  });
+
+        $.when(pt, obv, cov).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
