@@ -86,6 +86,7 @@
 
   function defaultPatient(){
     return {
+      pateint_id: {value: ''},
       fname: {value: ''},
       lname: {value: ''},
       gender: {value: ''},
@@ -129,6 +130,7 @@
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
+    $('#patient_id').html(p.patient_id);
     $('#fname').html(p.fname);
     $('#lname').html(p.lname);
     $('#gender').html(p.gender);
