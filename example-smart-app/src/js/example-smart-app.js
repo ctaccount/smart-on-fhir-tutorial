@@ -26,11 +26,9 @@
                     type: 'Coverage'
                   });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, cov).fail(onError);
 
-        $.when(pt, cov).fail(onError);
-
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, cov).done(function(patient, obv, cov) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
