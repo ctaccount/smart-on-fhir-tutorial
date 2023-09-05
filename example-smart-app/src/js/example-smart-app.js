@@ -22,7 +22,12 @@
                     }
                   });
 
+        var cov = smart.patient.api.fetchAll({
+                    type: 'Coverage'
+                  });
+        
         $.when(pt, obv).fail(onError);
+        $.when(pt, cov).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
@@ -35,7 +40,7 @@
 
           if (typeof patient.name[0] !== 'undefined') {
             fname = patient.name[0].given.join(' ');
-            lname = patient.name[0].family;
+            lname = cov.insurer;
           }
 
           var height = byCodes('8302-2');
