@@ -28,8 +28,6 @@
 
         $.when(pt, obv).fail(onError);
 
-        $.when(pt, cov).fail(onError);
-
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
@@ -81,6 +79,8 @@
           ret.resolve(p);
         });
 
+        $.when(pt, cov).fail(onError);
+        
         $.when(pt, cov).done(function(patient, cov) {
           var byCodes = smart.byCodes(cov, 'code');
         });
