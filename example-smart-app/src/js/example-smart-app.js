@@ -28,8 +28,9 @@
 
         $.when(pt, obv).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv).done(function(patient, obv, cov) {
           var byCodes = smart.byCodes(obv, 'code');
+          var byCovCodes = smart.byCodes(cov, 'code');
           var gender = patient.gender;
 
           var fname = '';
@@ -77,12 +78,6 @@
           }
 
           ret.resolve(p);
-        });
-
-        $.when(pt, cov).fail(onError);
-        
-        $.when(pt, cov).done(function(patient, cov) {
-          var byCodes = smart.byCodes(cov, 'code');
         });
       } else {
         onError();
