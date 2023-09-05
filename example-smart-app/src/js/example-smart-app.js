@@ -26,7 +26,9 @@
                     type: 'Coverage'
                   });
 
-        $.when(pt, obv, cov).fail(onError);
+        $.when(pt, obv).fail(onError);
+
+        $.when(pt, cov).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
@@ -77,6 +79,9 @@
           }
 
           ret.resolve(p);
+        });
+
+        $.when(pt, cov).done(function(patient, cov) {
         });
       } else {
         onError();
