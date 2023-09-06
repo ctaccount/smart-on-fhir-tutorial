@@ -46,6 +46,15 @@
             }
           }
           console.log(coverageArray);
+          var coverageTableData = "" ;
+      		for(var i in coverageArray){
+      			coverageTableData += "<tr>";
+      			coverageTableData += "<td>" 
+      					+ coverageArray[i].id +"</td>" 
+      					+ "<td>" + coverageArray[i].startDate +"</td>" 
+      					+ "<td>" + coverageArray[i].endDate +"</td>" ;
+      			coverageTableData += "</tr>";
+      		}
         });
 
         $.when(pt, obv).done(function(patient, obv) {
