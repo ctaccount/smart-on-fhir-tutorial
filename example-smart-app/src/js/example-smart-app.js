@@ -53,7 +53,7 @@
       					+ "<td>" + coverageArray[i].endDate +"</td>" ;
       			coverageTableData += "</tr>";
       		}
-          document.getElementById("result").innerHTML = coverageTableData;
+          document.getElementById('coverageResult').innerHTML = coverageTableData;
         });
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -117,7 +117,7 @@
   };
 
   function defaultPatient(){
-    document.getElementById("result").innerHTML = '';
+    document.getElementById("coverageResult").innerHTML = '';
     return {
       pateint_id: {value: ''},
       fname: {value: ''},
