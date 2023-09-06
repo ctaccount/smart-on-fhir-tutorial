@@ -30,7 +30,6 @@
 
         $.when(pt, obv).done(function(patient, obv, cov) {
           console.log('COVERAGE);
-          console.log(cov);
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
