@@ -29,8 +29,6 @@
         $.when(pt, obv).fail(onError);
 
         $.when(pt, cov).done(function(patient, cov) {
-          console.log('COVERAGE');
-          console.log(cov);
           var covByCodes = smart.byCodes(cov, 'code');
           var coverageArray = [];
           var coverageIndex = 0;
@@ -55,6 +53,7 @@
       					+ "<td>" + coverageArray[i].endDate +"</td>" ;
       			coverageTableData += "</tr>";
       		}
+          document.getElementById("result").innerHTML = coverageTableData;
         });
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -118,6 +117,7 @@
   };
 
   function defaultPatient(){
+    document.getElementById("result").innerHTML = '';
     return {
       pateint_id: {value: ''},
       fname: {value: ''},
