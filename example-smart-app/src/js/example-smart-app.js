@@ -22,10 +22,6 @@
                     }
                   });
 
-        var cov = smart.patient.api.fetchAll({
-                    type: 'Coverage'
-                  });
-
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
