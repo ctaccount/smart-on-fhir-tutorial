@@ -26,12 +26,15 @@
                     type: 'Coverage'
                   });
 
-        console.log('COVERAGE');
-        console.log(cov);
-
         $.when(pt, obv).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv, cov) {
+        $.when(pt, cov).done(function(patient, cov) {
+          console.log('COVERAGE');
+          console.log(cov);
+          var covByCodes = smart.byCodes(cov, 'code');
+        });
+
+        $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
