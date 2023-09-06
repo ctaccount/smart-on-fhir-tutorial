@@ -32,12 +32,20 @@
           console.log('COVERAGE');
           console.log(cov);
           var covByCodes = smart.byCodes(cov, 'code');
+          var coverageArray = [];
+          var coverageIndex = 0;
           for(var i = 0; i < cov.length; i++) {
-            var coverageArray = cov[i];
-            if (coverageArray.hasOwnProperty('period')) {
-              console.log(coverageArray.period);
+            var coverageItem = cov[i];
+            if (coverageItem.hasOwnProperty('period') && coverageItem.status == 'active') {
+              coverageArray[coverageIndex] = {
+                "id": coverageItem.id,
+                "startDate": coverageItem.period.start,
+                "endDate": coverageItem.period.end
+              }
+              coverageIndex = coverageIndex + 1;
             }
           }
+          console.log(coverageArray);
         });
 
         $.when(pt, obv).done(function(patient, obv) {
