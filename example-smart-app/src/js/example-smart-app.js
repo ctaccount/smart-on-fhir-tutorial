@@ -32,6 +32,12 @@
           console.log('COVERAGE');
           console.log(cov);
           var covByCodes = smart.byCodes(cov, 'code');
+          for(var i = 0; i < cov.length; i++) {
+            var coverageArray = cov[i];
+            if (coverageArray.hasOwnProperty('period')) {
+              console.log(coverageArray.period);
+            }
+          }
         });
 
         $.when(pt, obv).done(function(patient, obv) {
