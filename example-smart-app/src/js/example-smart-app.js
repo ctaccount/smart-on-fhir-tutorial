@@ -44,6 +44,7 @@
             }
             if (coverageItem.hasOwnProperty('insurer') && coverageItem.status == 'active') {
               console.log(coverageItem);
+            }
           }
           console.log(coverageArray);
           var coverageTableData = "" ;
