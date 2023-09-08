@@ -35,6 +35,7 @@
           for(var i = 0; i < cov.length; i++) {
             var coverageItem = cov[i];
             if (coverageItem.hasOwnProperty('period') && coverageItem.status == 'active') {
+              console.log(coverageItem);
               coverageArray[coverageIndex] = {
                 "id": coverageItem.id,
                 "startDate": coverageItem.period.start,
@@ -43,6 +44,7 @@
               coverageIndex = coverageIndex + 1;
             }
             if (coverageItem.hasOwnProperty('insurer') && coverageItem.status == 'active') {
+              console.log('Insurer');
               console.log(coverageItem);
             }
           }
