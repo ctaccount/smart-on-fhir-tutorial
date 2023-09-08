@@ -34,18 +34,15 @@
           var coverageIndex = 0;
           for(var i = 0; i < cov.length; i++) {
             var coverageItem = cov[i];
-            if (coverageItem.hasOwnProperty('period') && coverageItem.status == 'active') {
+            if (coverageItem.hasOwnProperty('period') && coverageItem.hasOwnProperty('payor') && coverageItem.status == 'active') {
               console.log(coverageItem);
               coverageArray[coverageIndex] = {
                 "id": coverageItem.id,
+                "payorId": coverageItem.payor[0].reference,
                 "startDate": coverageItem.period.start,
                 "endDate": coverageItem.period.end
               }
               coverageIndex = coverageIndex + 1;
-            }
-            if (coverageItem.hasOwnProperty('insurer') && coverageItem.status == 'active') {
-              console.log('Insurer');
-              console.log(coverageItem);
             }
           }
           console.log(coverageArray);
@@ -53,7 +50,7 @@
       		for(var i in coverageArray){
       			coverageTableData += "<tr>";
       			coverageTableData += "<td>" 
-      					+ coverageArray[i].id +"</td>" 
+      					+ coverageArray[i].payorId +"</td>" 
       					+ "<td>" + coverageArray[i].startDate +"</td>" 
       					+ "<td>" + coverageArray[i].endDate +"</td>" ;
       			coverageTableData += "</tr>";
