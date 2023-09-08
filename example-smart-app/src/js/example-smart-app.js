@@ -58,8 +58,8 @@
           document.getElementById('planEffective').innerHTML = insurance;
         });
 
-         $.when(pt, org).done(function(insuranceOrg, org) {
-           console.log(insuranceOrg);
+         $.when(pt, org).done(function(insuranceDetail, org) {
+           console.log(insuranceDetail);
            console.log(org);
           //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
         });
