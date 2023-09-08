@@ -50,11 +50,13 @@
             }
           }
           var insuranceDetail = coverageArray[0];
+          insuranceOrg = "";
           insuranceOrg = insuranceDetail.payorId.split('/')[1];
           var insurance = "<b>From: </b>"+insuranceDetail.startDate+"  <b>To: </b>"+insuranceDetail.endDate;
           document.getElementById('planEffective').innerHTML = insurance;
 
           $.when(insuranceOrg, org).done(function(insuranceOrg, org) {
+            console.log(insuranceOrg);
             var orgDetails = org.find(o => o.id === insuranceOrg);
             document.getElementById('primaryPayer').innerHTML = orgDetails.name;
           });
