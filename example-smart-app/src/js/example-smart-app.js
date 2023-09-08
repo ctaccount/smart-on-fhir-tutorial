@@ -56,7 +56,7 @@
           document.getElementById('primaryPayer').innerHTML = insuranceOrg;
           document.getElementById('planEffective').innerHTML = insurance;
 
-          $.when(pt, org).done(function(insuranceOrg, org) {
+          $.when(insuranceOrg, org).done(function(insuranceOrg, org) {
              console.log(insuranceOrg);
              console.log(org);
             //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
