@@ -36,7 +36,6 @@
         $.when(pt, obv).fail(onError);
 
         $.when(pt, cov).done(function(patient, cov) {
-          var covByCodes = smart.byCodes(cov, 'code');
           var coverageArray = [];
           var coverageIndex = 0;
           for(var i = 0; i < cov.length; i++) {
@@ -53,13 +52,13 @@
           }
           insuranceDetail = coverageArray[0];
           insuranceOrg = insuranceDetail.payorId.split('/')[1];
-          var insurance = "<b>From: <b>"+insuranceDetail.startDate+"  <b>To: <b>"+insuranceDetail.endDate;
+          var insurance = "<b>From: </b>"+insuranceDetail.startDate+"  <b>To: </b>"+insuranceDetail.endDate;
           document.getElementById('primaryPayer').innerHTML = insuranceOrg;
           document.getElementById('planEffective').innerHTML = insurance;
         });
 
-         $.when(pt, org).done(function(insuranceDetail, org) {
-           console.log(insuranceDetail);
+         $.when(pt, org).done(function(cov, org) {
+           console.log(cov);
            console.log(org);
           //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
         });
