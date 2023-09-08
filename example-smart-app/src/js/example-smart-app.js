@@ -30,7 +30,6 @@
                     type: 'Organization'
                   });
 
-        var insuranceDetail = "";
         var insuranceOrg = "";
 
         $.when(pt, obv).fail(onError);
@@ -50,18 +49,14 @@
               coverageIndex = coverageIndex + 1;
             }
           }
-          insuranceDetail = coverageArray[0];
+          var insuranceDetail = coverageArray[0];
           insuranceOrg = insuranceDetail.payorId.split('/')[1];
           var insurance = "<b>From: </b>"+insuranceDetail.startDate+"  <b>To: </b>"+insuranceDetail.endDate;
-          document.getElementById('primaryPayer').innerHTML = insuranceOrg;
           document.getElementById('planEffective').innerHTML = insurance;
 
           $.when(insuranceOrg, org).done(function(insuranceOrg, org) {
-            console.log(insuranceOrg);
-            console.log(org);
             var orgDetails = org.find(o => o.id === insuranceOrg);
-            console.log(orgDetails);
-            //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
+            document.getElementById('primaryPayer').innerHTML = orgDetails.name;
           });
         });
 
