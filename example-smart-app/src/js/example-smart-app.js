@@ -55,12 +55,12 @@
           var insurance = "<b>From: </b>"+insuranceDetail.startDate+"  <b>To: </b>"+insuranceDetail.endDate;
           document.getElementById('primaryPayer').innerHTML = insuranceOrg;
           document.getElementById('planEffective').innerHTML = insurance;
-        });
 
-         $.when(pt, org).done(function(cov, org) {
-           console.log(cov);
-           console.log(org);
-          //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
+          $.when(pt, org).done(function(insuranceOrg, org) {
+             console.log(insuranceOrg);
+             console.log(org);
+            //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
+          });
         });
 
         $.when(pt, obv).done(function(patient, obv) {
