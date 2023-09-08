@@ -26,6 +26,12 @@
                     type: 'Coverage'
                   });
 
+        var org = smart.patient.api.fetchAll({
+                    type: 'Organization'
+                  });
+
+        var insuranceDetail = "";
+
         $.when(pt, obv).fail(onError);
 
         $.when(pt, cov).done(function(patient, cov) {
@@ -45,17 +51,10 @@
               coverageIndex = coverageIndex + 1;
             }
           }
-          console.log(coverageArray);
-          var coverageTableData = "" ;
-      		for(var i in coverageArray){
-      			coverageTableData += "<tr>";
-      			coverageTableData += "<td>" 
-      					+ coverageArray[i].payorId +"</td>" 
-      					+ "<td>" + coverageArray[i].startDate +"</td>" 
-      					+ "<td>" + coverageArray[i].endDate +"</td>" ;
-      			coverageTableData += "</tr>";
-      		}
-          document.getElementById('coverageResult').innerHTML = coverageTableData;
+          insuranceDetail = coverageArray[0];
+          var insurance = "From: "+insuranceDetail.startDate+"  To: "+insuranceDetail.endDate;
+          document.getElementById('primaryPayer').innerHTML = insuranceDetail.payorId;
+          document.getElementById('planEffective').innerHTML = insurance;
         });
 
         $.when(pt, obv).done(function(patient, obv) {
