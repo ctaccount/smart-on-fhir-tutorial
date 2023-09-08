@@ -31,6 +31,7 @@
                   });
 
         var insuranceDetail = "";
+        var insuranceOrg = "";
 
         $.when(pt, obv).fail(onError);
 
@@ -41,7 +42,6 @@
           for(var i = 0; i < cov.length; i++) {
             var coverageItem = cov[i];
             if (coverageItem.hasOwnProperty('period') && coverageItem.hasOwnProperty('payor') && coverageItem.status == 'active') {
-              console.log(coverageItem);
               coverageArray[coverageIndex] = {
                 "id": coverageItem.id,
                 "payorId": coverageItem.payor[0].reference,
@@ -52,9 +52,16 @@
             }
           }
           insuranceDetail = coverageArray[0];
-          var insurance = "From: "+insuranceDetail.startDate+"  To: "+insuranceDetail.endDate;
-          document.getElementById('primaryPayer').innerHTML = insuranceDetail.payorId;
+          insuranceOrg = insuranceDetail.payorId.split('/')[1];
+          var insurance = "<b>From: <b>"+insuranceDetail.startDate+"  <b>To: <b>"+insuranceDetail.endDate;
+          document.getElementById('primaryPayer').innerHTML = insuranceOrg;
           document.getElementById('planEffective').innerHTML = insurance;
+        });
+
+         $.when(pt, org).done(function(insuranceOrg, org) {
+           console.log(insuranceOrg);
+           console.log(org);
+          //document.getElementById('primaryPayer').innerHTML = insuranceOrg;
         });
 
         $.when(pt, obv).done(function(patient, obv) {
