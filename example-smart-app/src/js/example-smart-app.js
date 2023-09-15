@@ -25,9 +25,42 @@
         var cov = smart.patient.api.fetchAll({
                     type: 'Coverage'
                   });
-        
+
+        var org = smart.patient.api.fetchAll({
+                    type: 'Organization'
+                  });
+
+        var insuranceOrg = "";
+
         $.when(pt, obv).fail(onError);
-        $.when(pt, cov).fail(onError);
+
+        $.when(pt, cov).done(function(patient, cov) {
+          var coverageArray = [];
+          var coverageIndex = 0;
+          for(var i = 0; i < cov.length; i++) {
+            var coverageItem = cov[i];
+            if (coverageItem.hasOwnProperty('period') && coverageItem.hasOwnProperty('payor') && coverageItem.status == 'active') {
+              coverageArray[coverageIndex] = {
+                "id": coverageItem.id,
+                "payorId": coverageItem.payor[0].reference,
+                "startDate": coverageItem.period.start,
+                "endDate": coverageItem.period.end
+              }
+              coverageIndex = coverageIndex + 1;
+            }
+          }
+          var insuranceDetail = coverageArray[0];
+          insuranceOrg = "";
+          insuranceOrg = insuranceDetail.payorId.split('/')[1];
+          var insurance = "<b>From: </b>"+insuranceDetail.startDate+"  <b>To: </b>"+insuranceDetail.endDate;
+          document.getElementById('planEffective').innerHTML = insurance;
+
+          $.when(insuranceOrg, org).done(function(insuranceOrg, org) {
+            console.log(insuranceOrg);
+            var orgDetails = org.find(o => o.id === insuranceOrg);
+            document.getElementById('primaryPayer').innerHTML = orgDetails.name;
+          });
+        });
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
@@ -90,6 +123,7 @@
   };
 
   function defaultPatient(){
+    document.getElementById("coverageResult").innerHTML = '';
     return {
       pateint_id: {value: ''},
       fname: {value: ''},
